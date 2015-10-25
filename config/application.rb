@@ -24,5 +24,12 @@ module Bloggins
     config.active_record.raise_in_transactional_callbacks = true
     config.middleware.use ActionDispatch::Flash
 
+    config.active_record.raise_in_transactional_callbacks = true
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins 'localhost:4200'
+        resource '*', headers:  :any, methods: :any
+      end
+    end
   end
 end
