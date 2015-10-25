@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :posts, except: [:new, :edit]
   use_doorkeeper
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
