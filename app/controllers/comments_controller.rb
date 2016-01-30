@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :doorkeeper_authorize!, only: [:create, :update]
+
   def index
     @comments = Comment.all
     render json: @comments
@@ -12,7 +14,8 @@ class CommentsController < ApplicationController
     attributes = {
       name: create_params[:attributes][:name],
       body: create_params[:attributes][:body],
-      post_id: create_params[:relationships][:post][:data][:id]
+      post_id: create_params[:relationships][:post][:data][:id],
+      user: current_resource_owner
     }
     @comment = Comment.create attributes
     render json: @comment

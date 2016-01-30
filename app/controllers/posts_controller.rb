@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  include ActionController::ImplicitRender
   respond_to :json
+  before_action :doorkeeper_authorize!, only: [:create, :update]
   def index
     @posts = Post.all
     render json: @posts, include:['comments']
@@ -14,7 +14,8 @@ class PostsController < ApplicationController
   def create
     attributes = {
       title: create_params[:attributes][:title],
-      body: create_params[:attributes][:body]
+      body: create_params[:attributes][:body],
+      user: current_resource_owner
     }
     @post = Post.create attributes
     respond_with @post
