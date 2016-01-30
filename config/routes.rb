@@ -2,8 +2,7 @@ Rails.application.routes.draw do
   resources :comments, except: [:new, :edit]
   resources :posts, except: [:new, :edit]
   use_doorkeeper
-  devise_for :users, except: [:create]
-  post '/signups', to: 'signups#create'
+  devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
