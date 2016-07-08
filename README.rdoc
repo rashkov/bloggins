@@ -1,5 +1,3 @@
-See demo: http://162.243.15.248/
-
 This is the back-end for a toy blog written in Ember (http://github.com/rashkov/emberr)
 
 It uses jsonapi, active_model_serializers, devise, and doorkeeper.
