@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find params[:id]
+    @post = Post.find params.permit(:id)[:id]
     render json: @post, include:['comments']
   end
 
